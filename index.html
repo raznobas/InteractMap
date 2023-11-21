@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Map</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+            font-size: 17px;
+            color: #121212;
+        }
+        a {
+            text-decoration: none;
+            color: unset;
+        }
+        #sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 475px;
+            height: 856px;
+            z-index: 10;
+            background-color: rgba(244, 244, 244, 0.75);
+            transition: right 0.3s ease-in-out;
+        }
+        .title {
+            font-weight: 700;
+            font-size: 54px;
+            padding-left: 30px;
+        }
+        .text-red {
+            color: #8C3B19;
+            font-weight: 700;
+        }
+        #sidebarContent {
+            padding: 90px 60px 0 30px;
+        }
+
+        #closeSidebar {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        #loop_map-show {
+            background: unset;
+            color: #121212;
+            border: 1px solid black;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        #loop_map-show:hover {
+            background-color: #121212;
+            color: #fff;
+            transition: 0.1s;
+        }
+
+        .row-btn {
+            display: flex;
+            margin-bottom: 60px;
+        }
+
+        .arrow-btn {
+            background: none;
+            display: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #map, #map2 {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .img-map {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .container-loop {
+            position: relative;
+            overflow: auto;
+        }
+
+        .region {
+            fill: rgba(145, 208, 79, 0.01);
+            stroke-width: 1.5;
+            fill-opacity: 0.5;
+        }
+
+        .region:hover {
+            fill: #59673b;
+            stroke: #59673b;
+            stroke-opacity: 1;
+            cursor: pointer;
+        }
+        .house-info {
+            display: none;
+        }
+        .row {
+            display: flex;
+        }
+        .row-house-list {
+            align-items: center;
+            border-bottom: 1px solid black;
+            padding: 27px 0 17px 0;
+            cursor: pointer;
+        }
+        .p-0 {
+            padding: 0!important;
+        }
+        .house-see::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            width: 19px;
+            height: 19px;
+            transform: translateY(-2px);
+            background: url(img/hover.svg) center center no-repeat;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .house-sell {
+            color: #BF3939;
+        }
+        .h-type-sell {
+            margin-right: auto;
+            position: relative;
+            text-decoration-line: line-through;
+        }
+        .house-booked::before {
+            background: url(img/cross-gray.svg)!important;
+        }
+        .house-booked {
+            color: #55575F;
+        }
+        .house-sell::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            width: 18px;
+            height: 18px;
+            transform: translateY(-2px);
+            background: url(img/cross.svg) center center no-repeat;
+            background-size: contain;
+        }
+
+        .h-type::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            transform: translateY(15px);
+            width: 140px;
+            height: 14px;
+            background: url(img/border-hover.svg) center center no-repeat;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .row-house-list:hover .h-type::after {
+            opacity: 1;
+        }
+        .row-house-list:hover::before {
+            opacity: 1;
+        }
+        .arrow-right {
+            transform: scaleX(-1);
+            margin-left: 20px;
+        }
+        .house-list {
+            width: 300px;
+            padding: 0 45px 0 30px;
+            overflow-y: auto;
+            height: 400px;
+            position: relative;
+        }
+        .h-type {
+            margin-right: auto;
+            position: relative;
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                font-size: 22px;
+                font-weight: 600;
+            }
+            h1 {
+                margin: 20px 0 0 0;
+            }
+            #loop_map-show {
+                font-size: 22px;
+            }
+            .house-list {
+                width: auto;
+                height: 500px;
+                margin-top: 15px;
+            }
+            .arrow-btn img, #closeSidebar img {
+                width: 50px;
+            }
+            #map, #map2 {
+                height: 100%;
+                width: 1700px;
+            }
+            .img-map {
+                height: 100%;
+                width: 1700px;
+            }
+            .container {
+                overflow: auto;
+            }
+            .scale {
+              scale: 1.8;
+            }
+            .container-loop {
+                overflow: auto;
+            }
+            .row-btn {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div style="overflow-y: hidden">
+    <div id="main_map" class="container" style="z-index: 5; height: 100%">
+        <img class="img-map scale" src="img/img.jpg" alt="">
+        <svg id="map" class="scale" viewBox="0 0 1100 500">
+            <polygon id="pol-area" class="region"
+                     points="585,140 470,245 480,270 460,290 650,320 700,350 640,165"></polygon>
+        </svg>
+    </div>
+    <div id="loop-map" class="container-loop" style="height: 0">
+        <img class="img-loop img-map" src="img/img_loop.jpg" alt="">
+        <svg id="map2" viewBox="0 0 1100 500">
+            <polygon id="pol1" class="region js-polygon"
+                     points="604,47 604,35 622,29 638,42 641,40 648,46 649,52 673,70 679,66 686,72 685,84 678,90 673,94 673,97 667,100"></polygon>
+            <polygon id="pol6" class="region js-polygon"
+                     points="674,107 674,94 690,82 698,88 698,93 707,97 707,100 713,102 716,107 720,107 727,117 732,118 732,133 715,141"></polygon>
+            <polygon id="pol4" class="region js-polygon"
+                     points="516,38 516,27 533,20 541,23 541,27 555,37 563,43 571,52 571,62 555,69 553,68"></polygon>
+            <polygon id="pol10" class="region js-polygon"
+                     points="568,84 568,72 585,65 594,68 594,71 600,74 600,78 615,86 624,96 624,106 604,114"></polygon>
+            <polygon id="pol14" class="region js-polygon"
+                     points="623,129 623,116 640,107 652,120 676,139 681,139 682,142 691,150 691,159 671,169"></polygon>
+            <polygon id="pol7" class="region js-polygon"
+                     points="699,194 699,183 715,176 723,179 730,188 738,191 751,202 758,212 758,223 741,230"></polygon>
+            <polygon id="pol5" class="region js-polygon"
+                     points="467,47 467,34 486,28 521,58 521,68 500,75"></polygon>
+            <polygon id="pol13" class="region js-polygon"
+                     points="524,93 524,78 541,72 547,80 549,82 556,84 562,89 569,100 569,110 551,118"></polygon>
+            <polygon id="pol2" class="region js-polygon"
+                     points="570,134 570,122 587,116 592,116 595,117 603,123 610,130 617,139 617,148 599,157"></polygon>
+            <polygon id="pol11" class="region js-polygon"
+                     points="663,211 664,197 679,185 687,191 687,197 696,200 701,204 709,211 718,221 723,225 723,235 704,244"></polygon>
+            <polygon id="pol3" class="region js-polygon"
+                     points="712,252 712,240 728,233 738,234 738,239 747,245 753,247 754,250 760,247 768,254 768,270 745,278"></polygon>
+            <polygon id="pol12" class="region js-polygon"
+                     points="394,52 394,40 412,33 419,41 427,43 427,47 433,49 439,55 454,69 454,82 438,88"></polygon>
+            <polygon id="pol9" class="region js-polygon"
+                     points="457,105 457,92 472,86 481,89 487,97 495,101 507,111 513,120 513,132 498,138"></polygon>
+            <polygon id="pol8" class="region js-polygon"
+                     points="511,150 511,139 527,132 535,135 535,139 543,144 550,147 554,153 557,153 558,153 566,160 566,171 543,182 535,175 536,169"></polygon>
+        </svg>
+
+    </div>
+    <div id="sidebar">
+        <div id="sidebarContent">
+            <div class="row-btn">
+                <button class="arrow-btn" style="padding-left: 30px" onclick="prevStep()">
+                    <img src="img/back.svg" alt="Назад"/>
+                </button>
+                <button id="closeSidebar"><img src="img/close.svg" alt="Закрыть"></button>
+            </div>
+            <div class="text_content">
+                <div class="area-info" style="padding-left: 30px">
+                    <h1 class="title p-0">ПЕРВЫЙ <br>КВАРТАЛ</h1>
+                    <p>Площадь застройки: 300 000 м² <br> Площадь озеленения: 20 000 м²</p>
+                    <p>44 дома <br>
+                        239 квартир (таунхауса) <br>
+                        3 игровых площадок <br>
+                        2 зоны барбекю<br>
+                        9 зон отдыха
+                    </p>
+                    <p>Квартир в продаже: 62</p>
+                    <!--                    <p class="text-red">100+ м² от 10 млн ₽ <br>-->
+                    <!--                        120+ м² от 15 млн ₽</p>-->
+                    <button id="loop_map-show" onclick="nextStep()">СМОТРЕТЬ</button>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №1</h1>
+                    <div class="house-list">
+                        <a href="">
+                            <div class="row row-house-list house-see">
+                                <div class="h-type">Тип А</div>
+                                <div>99,35 м²</div>
+                                <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                            </div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №2</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №3</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №4</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №5</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №6</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №7</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №8</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №9</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №10</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №11</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №12</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №13</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="house-info" style="display: none">
+                    <h1 class="title">Дом №14</h1>
+                    <div class="house-list">
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>104,61 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип И</div>
+                            <div>124,43 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a href="" class="row row-house-list house-see">
+                            <div class="h-type">Тип Д</div>
+                            <div>160,01 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Получаем все полигоны
+                var polygons = document.querySelectorAll('.js-polygon');
+
+                // Получаем все блоки информации
+                var infoBlocks = document.querySelectorAll('.house-info');
+
+                // Добавляем обработчики событий ко всем полигонам
+                polygons.forEach(function(polygon, index) {
+                    polygon.addEventListener('click', function() {
+                        // Скрываем все блоки информации
+                        infoBlocks.forEach(function(infoBlock) {
+                            infoBlock.style.display = 'none';
+                        });
+
+                        // Отображаем блок информации, соответствующий текущему полигону
+                        infoBlocks[index].style.display = 'block';
+                    });
+                });
+
+            </script>
+            <script>
+
+                function nextStep() {
+                    const loopMap = document.getElementById('loop-map');
+                    document.getElementById('sidebar').style.right = '-500px';
+                    document.querySelector('.arrow-btn').style.display = 'block';
+                    loopMap.style.display = 'block';
+                    const contLoop = document.querySelector('.container-loop');
+                    contLoop.scrollBy(500, 0);
+                }
+                function prevStep() {
+                    document.querySelector('.area-info').style.display = "block";
+                    document.querySelector('.house-info').style.display = "none";
+                    const mainMap = document.getElementById('main_map');
+                    const loopMap = document.getElementById('loop-map');
+                    infoBlocks.forEach(function(infoBlock) {
+                        infoBlock.style.display = 'none';
+                    });
+                    loopMap.style.display = 'none';
+                    mainMap.style.height = '100%';
+                    mainMap.style.display = 'block';
+                    document.querySelector('.arrow-btn').style.display = 'none';
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (window.innerWidth < 769) {
+    document.addEventListener('DOMContentLoaded', () => {
+
+            document.getElementById('pol-area').addEventListener('click', function () {
+            document.getElementById('sidebar').style.top = '0';
+            });
+            document.getElementById('closeSidebar').addEventListener('click', function () {
+            document.getElementById('sidebar').style.top = '-100%';
+            });
+
+    })
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const polHouse = document.querySelectorAll('.js-polygon');
+        polHouse.forEach((e) => {
+            e.addEventListener('click', () => {
+                document.getElementById('sidebar').style.right = '0';
+                document.querySelector('.area-info').style.display = "none";
+            })
+        })
+        document.getElementById('pol-area').addEventListener('click', function () {
+            document.getElementById('sidebar').style.right = '0';
+        });
+        document.getElementById('closeSidebar').addEventListener('click', function () {
+            document.getElementById('sidebar').style.right = '-100%';
+        });
+        document.getElementById('loop_map-show').addEventListener('click', function () {
+            const mainMap = document.getElementById('main_map');
+            const loopMap = document.getElementById('loop-map');
+            mainMap.style.display = 'none';
+            loopMap.style.height = '100%';
+        });
+        const contMain = document.querySelector('.container')
+        contMain.scrollBy(400,0);
+    });
+
+
+</script>
+</body>
+</html>
