@@ -727,10 +727,10 @@
                 var infoBlocks = document.querySelectorAll('.house-info');
 
                 // Добавляем обработчики событий ко всем полигонам
-                polygons.forEach(function(polygon, index) {
-                    polygon.addEventListener('click', function() {
+                polygons.forEach(function (polygon, index) {
+                    polygon.addEventListener('click', function () {
                         // Скрываем все блоки информации
-                        infoBlocks.forEach(function(infoBlock) {
+                        infoBlocks.forEach(function (infoBlock) {
                             infoBlock.style.display = 'none';
                         });
 
@@ -750,12 +750,13 @@
                     const contLoop = document.querySelector('.container-loop');
                     contLoop.scrollBy(500, 0);
                 }
+
                 function prevStep() {
                     document.querySelector('.area-info').style.display = "block";
                     document.querySelector('.house-info').style.display = "none";
                     const mainMap = document.getElementById('main_map');
                     const loopMap = document.getElementById('loop-map');
-                    infoBlocks.forEach(function(infoBlock) {
+                    infoBlocks.forEach(function (infoBlock) {
                         infoBlock.style.display = 'none';
                     });
                     loopMap.style.display = 'none';
