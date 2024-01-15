@@ -23,13 +23,14 @@ a {
     font-weight: 700;
     font-size: 54px;
     padding-left: 30px;
+    margin-bottom: 10px;
 }
 .text-red {
     color: #8C3B19;
     font-weight: 700;
 }
 #sidebarContent {
-    padding: 90px 60px 0 30px;
+    padding: 30px 60px 0 30px;
 }
 
 #closeSidebar {
@@ -60,7 +61,7 @@ a {
 
 .row-btn {
     display: flex;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .arrow-btn {
@@ -95,15 +96,40 @@ a {
 
 .region {
     fill: rgba(145, 208, 79, 0.01);
-    stroke-width: 1.5;
     fill-opacity: 0.5;
+    stroke-width: 0.4;
+    transition: stroke, fill 0.3s ease;
 }
-
-.region:hover {
+.reserve {
+    fill: rgb(94 96 100);
+    fill-opacity: 0.5;
+    stroke: rgb(94 96 100);
+    stroke-width: 0.4;
+}
+.sell {
+    fill: rgb(108 35 35);
+    fill-opacity: 0.5;
+    stroke: rgb(56 33 45);
+    stroke-width: 0.4;
+}
+[data-part] {
+    display: none;
+}
+.house-polygon {
+    stroke-width: 1.5;
+}
+.region:hover, .region:active, .js-polygon.pol-active, .area-active {
     fill: #59673b;
     stroke: #59673b;
+    /*stroke: #7fa920;*/
     stroke-opacity: 1;
     cursor: pointer;
+}
+.reserve.pol-active {
+    fill-opacity: 0.8;
+}
+.sell.pol-active {
+    fill-opacity: 0.8;
 }
 .house-info {
     display: none;
@@ -120,7 +146,7 @@ a {
 .p-0 {
     padding: 0!important;
 }
-.house-see::before {
+.item-see::before {
     content: '';
     position: absolute;
     left: 2px;
@@ -132,31 +158,39 @@ a {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-.house-sell {
+.item-sell {
     color: #BF3939;
+    cursor: default;
 }
-.h-type-sell {
+.text-sell-reserve {
     margin-right: auto;
     position: relative;
     text-decoration-line: line-through;
 }
-.house-booked::before {
-    background: url(../img/cross-gray.svg)!important;
-}
-.house-booked {
-    color: #55575F;
-}
-.house-sell::before {
+.item-reserve::before {
     content: '';
     position: absolute;
-    left: -25px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-2px);
+    background: url(../img/cross-gray.svg) center center no-repeat;
+    background-size: contain;
+}
+.item-reserve {
+    color: #55575F;
+    cursor: default;
+}
+.item-sell::before {
+    content: '';
+    position: absolute;
+    left: 2px;
     width: 18px;
     height: 18px;
     transform: translateY(-2px);
     background: url(../img/cross.svg) center center no-repeat;
     background-size: contain;
 }
-
 .h-type::after {
     content: '';
     position: absolute;
@@ -170,10 +204,10 @@ a {
     transition: opacity 0.3s ease;
 }
 
-.row-house-list:hover .h-type::after {
+.row-house-list:hover .h-type::after, .pol-active.row-house-list .h-type::after {
     opacity: 1;
 }
-.row-house-list:hover::before {
+.row-house-list:hover::before, .pol-active.row-house-list::before {
     opacity: 1;
 }
 .arrow-right {
@@ -183,7 +217,6 @@ a {
 .house-list {
     width: 300px;
     padding: 0 45px 0 30px;
-    overflow-y: auto;
     height: 400px;
     position: relative;
 }
@@ -200,6 +233,10 @@ a {
     h1 {
         margin: 20px 0 0 0;
     }
+    #myImage, #map2 {
+        transform-origin: 55% 12%;
+        transform: scale(2);
+    }
     #loop_map-show {
         font-size: 22px;
     }
@@ -207,6 +244,9 @@ a {
         width: auto;
         height: 500px;
         margin-top: 15px;
+    }
+    .h-type::after {
+        transform: translateY(20px);
     }
     .arrow-btn img, #closeSidebar img {
         width: 50px;

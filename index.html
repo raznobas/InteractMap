@@ -11,42 +11,312 @@
         <img class="img-map scale" src="img/img.jpg" alt="">
         <svg id="map" class="scale" viewBox="0 0 1100 500">
             <polygon id="pol-area" class="region"
-                     points="585,140 470,245 480,270 460,290 650,320 700,350 640,165"></polygon>
+                     points="585,140 470,245 480,270 460,290 650,320 700,350 640,165">
+            </polygon>
         </svg>
     </div>
-    <div id="loop-map" class="container-loop" style="height: 0">
-        <img class="img-loop img-map" src="img/img_loop.jpg" alt="">
-        <svg id="map2" viewBox="0 0 1100 500">
-            <polygon id="pol1" class="region js-polygon"
-                     points="604,47 604,35 622,29 638,42 641,40 648,46 649,52 673,70 679,66 686,72 685,84 678,90 673,94 673,97 667,100"></polygon>
-            <polygon id="pol6" class="region js-polygon"
-                     points="674,107 674,94 690,82 698,88 698,93 707,97 707,100 713,102 716,107 720,107 727,117 732,118 732,133 715,141"></polygon>
-            <polygon id="pol4" class="region js-polygon"
-                     points="516,38 516,27 533,20 541,23 541,27 555,37 563,43 571,52 571,62 555,69 553,68"></polygon>
-            <polygon id="pol10" class="region js-polygon"
-                     points="568,84 568,72 585,65 594,68 594,71 600,74 600,78 615,86 624,96 624,106 604,114"></polygon>
-            <polygon id="pol14" class="region js-polygon"
-                     points="623,129 623,116 640,107 652,120 676,139 681,139 682,142 691,150 691,159 671,169"></polygon>
-            <polygon id="pol7" class="region js-polygon"
-                     points="699,194 699,183 715,176 723,179 730,188 738,191 751,202 758,212 758,223 741,230"></polygon>
-            <polygon id="pol5" class="region js-polygon"
-                     points="467,47 467,34 486,28 521,58 521,68 500,75"></polygon>
-            <polygon id="pol13" class="region js-polygon"
-                     points="524,93 524,78 541,72 547,80 549,82 556,84 562,89 569,100 569,110 551,118"></polygon>
-            <polygon id="pol2" class="region js-polygon"
-                     points="570,134 570,122 587,116 592,116 595,117 603,123 610,130 617,139 617,148 599,157"></polygon>
-            <polygon id="pol11" class="region js-polygon"
-                     points="663,211 664,197 679,185 687,191 687,197 696,200 701,204 709,211 718,221 723,225 723,235 704,244"></polygon>
-            <polygon id="pol3" class="region js-polygon"
-                     points="712,252 712,240 728,233 738,234 738,239 747,245 753,247 754,250 760,247 768,254 768,270 745,278"></polygon>
-            <polygon id="pol12" class="region js-polygon"
-                     points="394,52 394,40 412,33 419,41 427,43 427,47 433,49 439,55 454,69 454,82 438,88"></polygon>
-            <polygon id="pol9" class="region js-polygon"
-                     points="457,105 457,92 472,86 481,89 487,97 495,101 507,111 513,120 513,132 498,138"></polygon>
-            <polygon id="pol8" class="region js-polygon"
-                     points="511,150 511,139 527,132 535,135 535,139 543,144 550,147 554,153 557,153 558,153 566,160 566,171 543,182 535,175 536,169"></polygon>
-        </svg>
+    <div id="loop-map" class="container-loop" style="height: 0;">
+        <img id="myImage" class="img-loop img-map" src="img/img_loop.jpg" alt="" style="transform-origin: 70% 10%;transform: scale(1.5);">
+        <svg id="map2" viewBox="0 0 1100 500" style="transform-origin: 70% 10%;transform: scale(1.5);">
+<!--             style="transform-origin: 55% 12%;transform: scale(3);"-->
+            <polygon id="part1" class="region js-polygon house-polygon" data-info="house-info1" points="604,48 604,35 622,30 637,43 640.5,40.5 648,47 648,52 672.5,71 678,66 686,72 686,85 679,90 673,94 673,97 667,100"></polygon>
+            <polygon id="part1.1"
+                     class="reserve" data-part="info1"
+                     points="604,49 612,55 612,42 629,36 622,30 604,35"></polygon>
+            <polygon id="part1.2" onmouseover="highlightListItem('list1.2')" onmouseout="removeHighlight('list1.2')"
+                     class="region js-polygon" data-part="info1"
+                     points="612,55 618,59 618,48 636,42 629,36 612,42"></polygon>
+            <polygon id="part1.3"
+                     class="sell" data-part="info1"
+                     points="618,59 624,64 624,54 637,43 636,42 618,48"></polygon>
+            <polygon id="part1.4" onmouseover="highlightListItem('list1.4')" onmouseout="removeHighlight('list1.4')"
+                     class="region js-polygon" data-part="info1"
+                     points="624,65 632,71 632,61 648,54 648,47 640.5,40.5 624,54"></polygon>
+            <polygon id="part1.5" onmouseover="highlightListItem('list1.5')" onmouseout="removeHighlight('list1.5')"
+                     class="region js-polygon" data-part="info1"
+                     points="632,72 638,77 638,66 655,58 649,53 632,61"></polygon>
+            <polygon id="part1.6"
+                     class="sell" data-part="info1"
+                     points="638,77 646,83 646,71 662,63 655,58 638,66"></polygon>
+            <polygon id="part1.7"
+                     class="reserve" data-part="info1"
+                     points="646,83 652,88 652,77 668,68 662,63 646,71"></polygon>
+            <polygon id="part1.8" onmouseover="highlightListItem('list1.8')" onmouseout="removeHighlight('list1.8')"
+                     class="region js-polygon" data-part="info1"
+                     points="652,87 652,77 668,68 673,71 658,82 658,92"></polygon>
+            <polygon id="part1.9"
+                     class="sell" data-part="info1"
+                     points="658,92 667,100 673,97 673,94 686,85 686,72 678,66 658,82"></polygon>
+            <!--            house 2-->
+            <polygon id="part2" class="region js-polygon house-polygon" data-info="house-info2"
+                     points="674,107 673,94 690,82 697,88 697,95 706,97 706,101 712,102 716,108 719,107 725,116 726,119
+                     733,119 733,129 731,130 731,135 715,142 709,137 709,135 709,135"></polygon>
 
+            <polygon id="part2.1" onmouseover="highlightListItem('list2.1')" onmouseout="removeHighlight('list2.1')"
+                     class="region js-polygon" data-part="info2"
+                     points="674,107 681,113 681,102 690,96 697,95 697,88 690,82 673,94"></polygon>
+            <polygon id="part2.2" onmouseover="highlightListItem('list2.2')" onmouseout="removeHighlight('list2.2')"
+                     class="region js-polygon" data-part="info2"
+                     points="681,113 688,119 688,107 696,102 706,101 706,97 698,95 690,96 681,102"></polygon>
+            <polygon id="part2.3" onmouseover="highlightListItem('list2.3')" onmouseout="removeHighlight('list2.3')"
+                     class="region js-polygon" data-part="info2"
+                     points="688,119 695,125 695,109 712,102 706,101 696,102 688,107"></polygon>
+            <polygon id="part2.4" onmouseover="highlightListItem('list2.4')" onmouseout="removeHighlight('list2.4')"
+                     class="region js-polygon" data-part="info2"
+                     points="695,125 701,128 701,115 716,108 712,102 695,109"></polygon>
+            <polygon id="part2.5" onmouseover="highlightListItem('list2.5')" onmouseout="removeHighlight('list2.5')"
+                     class="region js-polygon" data-part="info2"
+                     points="701,128 708,134 708,124 725,116 719,107 701,115"></polygon>
+            <polygon id="part2.6" onmouseover="highlightListItem('list2.6')" onmouseout="removeHighlight('list2.6')"
+                     class="region js-polygon" data-part="info2"
+                     points="708,136 715,142 731,135 731,130 733,129 733,119 726,119 725,116 708,124"></polygon>
+
+            <!--            house 3-->
+            <polygon id="part3" class="region js-polygon house-polygon" data-info="house-info3"
+                     points="517,39 517,28 532,22 540,23 540,27 556,38 571,51 571,62 555,71 547,65 546,65"></polygon>
+
+            <polygon id="part3.1" onmouseover="highlightListItem('list3.1')" onmouseout="removeHighlight('list3.1')"
+                     class="region js-polygon" data-part="info3"
+                     points="517,40 517,28 532,22 540,23 540,27 522,35 522,43 522,44"></polygon>
+            <polygon id="part3.2" onmouseover="highlightListItem('list3.2')" onmouseout="removeHighlight('list3.2')"
+                     class="region js-polygon" data-part="info3"
+                     points="522,44 530,50 530,41 548,33 540,27 522,35"></polygon>
+            <polygon id="part3.3" onmouseover="highlightListItem('list3.3')" onmouseout="removeHighlight('list3.3')"
+                     class="region js-polygon" data-part="info3"
+                     points="530,50 538,58 538,44 554,37 549,33 530,41"></polygon>
+            <polygon id="part3.4" onmouseover="highlightListItem('list3.4')" onmouseout="removeHighlight('list3.4')"
+                     class="region js-polygon" data-part="info3"
+                     points="538,57 546,65 547,65 547,54 546,53 546,46 564,45 555,37 538,44"></polygon>
+            <polygon id="part3.5" onmouseover="highlightListItem('list3.5')" onmouseout="removeHighlight('list3.5')"
+                     class="region js-polygon" data-part="info3"
+                     points="547,65 555,71 571,62 571,51 564,45 546,46 546,53 547,54"></polygon>
+            <!--            house 4-->
+            <polygon id="part4" class="region js-polygon house-polygon" data-info="house-info4"
+                     points="568,84 568,73 586,66 594,69 594,72 600,74 600,79 608,84 615,86 623,97 623,107 606,115"></polygon>
+
+            <polygon id="part4.1" onmouseover="highlightListItem('list4.1')" onmouseout="removeHighlight('list4.1')"
+                     class="region js-polygon" data-part="info4"
+                     points="568,84 576,91 576,79 585,73 594,72 594,69 586,66 568,73"></polygon>
+            <polygon id="part4.2" onmouseover="highlightListItem('list4.2')" onmouseout="removeHighlight('list4.2')"
+                     class="region js-polygon" data-part="info4"
+                     points="576,79 576,91 581,95 581,93 580,92 580,85 581,84 583,86 600,79 600,74 594,72 585,73"></polygon>
+            <polygon id="part4.3" onmouseover="highlightListItem('list4.3')" onmouseout="removeHighlight('list4.3')"
+                     class="region js-polygon" data-part="info4"
+                     points="581,95 581,95 591,103 591,92 608,84 600,79 583,86 581,84 580,85 580,92 581,93 581,95"></polygon>
+            <polygon id="part4.4" onmouseover="highlightListItem('list4.4')" onmouseout="removeHighlight('list4.4')"
+                     class="region js-polygon" data-part="info4"
+                     points="591,103 597,108 597,94 615,86 608,84 591,92"></polygon>
+            <polygon id="part4.5" onmouseover="highlightListItem('list4.5')" onmouseout="removeHighlight('list4.5')"
+                     class="region js-polygon" data-part="info4"
+                     points="597,108 606,115 623,107 623,97 615,86 597,94"></polygon>
+            <!--            house 5-->
+            <polygon id="part5" class="region js-polygon house-polygon" data-info="house-info5"
+                     points="629,134 622,128 622,118 640,108 656,124 676,141 676,140 681,139 681,143 683,143 691,150 691,162 669,171 660,164 660,160 661,159 644,146 643,147 629,135"></polygon>
+
+            <polygon id="part5.1" onmouseover="highlightListItem('list5.1')" onmouseout="removeHighlight('list5.1')"
+                     class="region js-polygon" data-part="info5"
+                     points="622,128 629,134 629,123 645,113 640,108 622,118 622,127"></polygon>
+            <polygon id="part5.2" onmouseover="highlightListItem('list5.2')" onmouseout="removeHighlight('list5.2')"
+                     class="region js-polygon" data-part="info5"
+                     points="629,135 636,141 636,128 654,122 645,113 629,123 629,135"></polygon>
+            <polygon id="part5.3" onmouseover="highlightListItem('list5.3')" onmouseout="removeHighlight('list5.3')"
+                     class="region js-polygon" data-part="info5"
+                     points="636,141 643,147 643,134 661,128 654,122 636,128 636,141"></polygon>
+            <polygon id="part5.4" onmouseover="highlightListItem('list5.4')" onmouseout="removeHighlight('list5.4')"
+                     class="region js-polygon" data-part="info5"
+                     points="643,147 651,151 651,140 668,134 661,128 643,134 643,147"></polygon>
+            <polygon id="part5.5" onmouseover="highlightListItem('list5.5')" onmouseout="removeHighlight('list5.5')"
+                     class="region js-polygon" data-part="info5"
+                     points="651,151 657,156 657,145 674,139 668,134 668,134 651,140"></polygon>
+            <polygon id="part5.6" onmouseover="highlightListItem('list5.6')" onmouseout="removeHighlight('list5.6')"
+                     class="region js-polygon" data-part="info5"
+                     points="674,139 657,145 657,156 661,159 663,158 663,145 676,143 676,141"></polygon>
+            <polygon id="part5.7" onmouseover="highlightListItem('list5.7')" onmouseout="removeHighlight('list5.7')"
+                     class="region js-polygon" data-part="info5"
+                     points="691,162 691,150 683,143 681,143 681,139 676,140 676,143 663,145 663,158 660,160 660,164 669,171"></polygon>
+
+            <!--            house 6-->
+            <polygon id="" class="region js-polygon house-polygon" data-info="house-info6"
+                     points="700,195 700,184 715,178 723,180 730,189 737,191 737,192 750,203 758,212 758,223 741,230"></polygon>
+
+            <polygon id="part6.1" onmouseover="highlightListItem('list6.1')" onmouseout="removeHighlight('list6.1')"
+                     class="region js-polygon" data-part="info6"
+                     points="700,195 705,199 705,187 723,180 716,178 700,184 700,196"></polygon>
+            <polygon id="part6.2" onmouseover="highlightListItem('list6.2')" onmouseout="removeHighlight('list6.2')"
+                     class="region js-polygon" data-part="info6"
+                     points="705,199 713,206 713,197 730,189 723,180 705,187 705,199"></polygon>
+            <polygon id="part6.3" onmouseover="highlightListItem('list6.3')" onmouseout="removeHighlight('list6.3')"
+                     class="region js-polygon" data-part="info6"
+                     points="713,206 721,213 721,201 730,195 737,194 737,191 730,189 713,197"></polygon>
+            <polygon id="part6.4" onmouseover="highlightListItem('list6.4')" onmouseout="removeHighlight('list6.4')"
+                     class="region js-polygon" data-part="info6"
+                     points="721,213 727,218 727,207 737,200 745,199 739,194 730,195 721,201"></polygon>
+            <polygon id="part6.5" onmouseover="highlightListItem('list6.5')" onmouseout="removeHighlight('list6.5')"
+                     class="region js-polygon" data-part="info6"
+                     points="727,218 732,222 732,210 749,202 745,199 737,200 727,207 727,218"></polygon>
+            <polygon id="part6.6" onmouseover="highlightListItem('list6.6')" onmouseout="removeHighlight('list6.6')"
+                     class="region js-polygon" data-part="info6"
+                     points="732,210 732,222 741,230 758,223 758,212 749,202 732,210 732,210"></polygon>
+
+            <!--            house 7-->
+            <polygon id="part7" class="region js-polygon house-polygon" data-info="house-info7"
+                     points="467,48 467,34 485,28 520,58 520,69 502,77"></polygon>
+            <polygon id="part7.1" onmouseover="highlightListItem('list7.1')" onmouseout="removeHighlight('list7.1')"
+                     class="region js-polygon" data-part="info7"
+                     points="474,54 474,41 492,34 485,28 467,34 467,48"></polygon>
+            <polygon id="part7.2" onmouseover="highlightListItem('list7.2')" onmouseout="removeHighlight('list7.2')"
+                     class="region js-polygon" data-part="info7"
+                     points="474,54 482,60 482,48 500,41 492,34 474,41"></polygon>
+            <polygon id="part7.3" onmouseover="highlightListItem('list7.3')" onmouseout="removeHighlight('list7.3')"
+                     class="region js-polygon" data-part="info7"
+                     points="482,60 488,65 488,53 506,46 500,41 482,48"></polygon>
+            <polygon id="part7.4" onmouseover="highlightListItem('list7.4')" onmouseout="removeHighlight('list7.4')"
+                     class="region js-polygon" data-part="info7"
+                     points="488,65 495,71 495,59 513,52 506,46 488,53"></polygon>
+            <polygon id="part7.5" onmouseover="highlightListItem('list7.5')" onmouseout="removeHighlight('list7.5')"
+                     class="region js-polygon" data-part="info7"
+                     points="495,71 502,77 520,69 520,58 513,52 495,59"></polygon>
+
+            <!--            house 8-->
+            <polygon id="part8" class="region js-polygon house-polygon" data-info="house-info8"
+                     points="523,95 523,79 542,72 548,80 546,81 550,84 551,82 556,84 560,90 562,89 569,101 568,112 551,118"></polygon>
+
+            <polygon id="part8.1" onmouseover="highlightListItem('list8.1')" onmouseout="removeHighlight('list8.1')"
+                     class="region js-polygon" data-part="info8"
+                     points="523,95 531,101 531,90 546,81 548,80 542,72 523,79"></polygon>
+            <polygon id="part8.2" onmouseover="highlightListItem('list8.2')" onmouseout="removeHighlight('list8.2')"
+                     class="region js-polygon" data-part="info8"
+                     points="531,90 531,101 537,106 538,92 556,84 551,82 550,84 546,81"></polygon>
+            <polygon id="part8.3" onmouseover="highlightListItem('list8.3')" onmouseout="removeHighlight('list8.3')"
+                     class="region js-polygon" data-part="info8"
+                     points="537,106 544,112 544,96 560,90 556,84 538,92"></polygon>
+            <polygon id="part8.4" onmouseover="highlightListItem('list8.4')" onmouseout="removeHighlight('list8.4')"
+                     class="region js-polygon" data-part="info8"
+                     points="544,112 551,118 568,112 569,101 562,89 544,96"></polygon>
+
+            <!--            house 9-->
+            <polygon id="part9" class="region js-polygon house-polygon" data-info="house-info9"
+                     points="570,134 570,123 586,116 589,117 591,116 596,118 600,124 602,123 607,129 609,129 617,138 617,149 599,156"></polygon>
+
+            <polygon id="part9.1" onmouseover="highlightListItem('list9.1')" onmouseout="removeHighlight('list9.1')"
+                     class="region js-polygon" data-part="info9"
+                     points="570,134 578,140 578,125 596,118 591,116 589,117 586,116 570,123"></polygon>
+            <polygon id="part9.2" onmouseover="highlightListItem('list9.2')" onmouseout="removeHighlight('list9.2')"
+                     class="region js-polygon" data-part="info9"
+                     points="578,140 585,145 585,131 600,124 596,118  578,125"></polygon>
+            <polygon id="part9.3" onmouseover="highlightListItem('list9.3')" onmouseout="removeHighlight('list9.3')"
+                     class="region js-polygon" data-part="info9"
+                     points="585,145 592,151 592,137 607,130 602,123 585,131"></polygon>
+            <polygon id="part9.4" onmouseover="highlightListItem('list9.4')" onmouseout="removeHighlight('list9.4')"
+                     class="region js-polygon" data-part="info9"
+                     points="592,151 599,156 617,149 617,139 609,129 592,137"></polygon>
+            <!--            house 10-->
+            <polygon id="part10" class="region js-polygon house-polygon" data-info="house-info10"
+                     points="663,212 663,199 679,186 687,193 687,198 696,201 696,204 702,207 706,212 709,212 717,222 723,224 723,237 705,246"></polygon>
+
+            <polygon id="part10.1" onmouseover="highlightListItem('list10.1')" onmouseout="removeHighlight('list10.1')"
+                     class="region js-polygon" data-part="info10"
+                     points="663,198 663,212 670,218 670,206 679,200 687,199 687,193 679,186"></polygon>
+            <polygon id="part10.2" onmouseover="highlightListItem('list10.2')" onmouseout="removeHighlight('list10.2')"
+                     class="region js-polygon" data-part="info10"
+                     points="670,218 677,223 677,211 686,206 696,205 696,201 688,199 679,200 670,206"></polygon>
+            <polygon id="part10.3" onmouseover="highlightListItem('list10.3')" onmouseout="removeHighlight('list10.3')"
+                     class="region js-polygon" data-part="info10"
+                     points="677,223 684,229 684,214 702,207 697,205 686,206 677,211 677,224"></polygon>
+            <polygon id="part10.4" onmouseover="highlightListItem('list10.4')" onmouseout="removeHighlight('list10.4')"
+                     class="region js-polygon" data-part="info10"
+                     points="684,229 690,234 690,219 706,212 702,207 684,214 684,214"></polygon>
+            <polygon id="part10.5" onmouseover="highlightListItem('list10.5')" onmouseout="removeHighlight('list10.5')"
+                     class="region js-polygon" data-part="info10"
+                     points="690,234 698,240 698,229 707,223 717,222 709,212 706,212 690,219 690,219"></polygon>
+            <polygon id="part10.6" onmouseover="highlightListItem('list10.6')" onmouseout="removeHighlight('list10.6')"
+                     class="region js-polygon" data-part="info10"
+                     points="674,139 657,145 657,156 661,159 663,158 663,145 676,143 676,141"></polygon>
+            <polygon id="part10.7" onmouseover="highlightListItem('list10.7')" onmouseout="removeHighlight('list10.7')"
+                     class="region js-polygon" data-part="info10"
+                     points="698,240 705,246 723,237 723,224 717,222 707,223 698,229 698,229"></polygon>
+
+            <!--            house 11-->
+            <polygon id="part11" class="region js-polygon house-polygon" data-info="house-info11"
+                     points="712,252 712,242 729,234 738,236 738,240 747,247 752,248 755,252 759,249 767,255 767,265 770,269 770,274 750,284"></polygon>
+
+            <polygon id="part11.1" onmouseover="highlightListItem('list11.1')" onmouseout="removeHighlight('list11.1')"
+                     class="region js-polygon" data-part="info11"
+                     points="712,252 720,259 720,247 738,240 738,236 729,234 712,242"></polygon>
+            <polygon id="part11.2" onmouseover="highlightListItem('list11.2')" onmouseout="removeHighlight('list11.2')"
+                     class="region js-polygon" data-part="info11"
+                     points="720,259 728,265 728,253 745,246 738,240 720,247 720,258"></polygon>
+            <polygon id="part11.3" onmouseover="highlightListItem('list11.3')" onmouseout="removeHighlight('list11.3')"
+                     class="region js-polygon" data-part="info11"
+                     points="728,265 734,270 734,256 752,248 745,246 728,253"></polygon>
+            <polygon id="part11.4" onmouseover="highlightListItem('list11.4')" onmouseout="removeHighlight('list11.4')"
+                     class="region js-polygon" data-part="info11"
+                     points="734,270 739,275 739,264 755,252 752,248 734,256"></polygon>
+            <polygon id="part11.5" onmouseover="highlightListItem('list11.5')" onmouseout="removeHighlight('list11.5')"
+                     class="region js-polygon" data-part="info11"
+                     points="739,275 750,284 770,274 770,269 767,265 767,255 759,249 739,264"></polygon>
+
+            <!--            house 12-->
+            <polygon id="part12" class="region js-polygon house-polygon" data-info="house-info12"
+                     points="395,54 394,40 412,33 418,41 427,44 427,48 433,50 437,56 439,55 445,63 446,63 453,69 453,82 438,88"></polygon>
+
+            <polygon id="part12.1" onmouseover="highlightListItem('list12.1')" onmouseout="removeHighlight('list12.1')"
+                     class="region js-polygon" data-part="info12"
+                     points="395,54 401,59 401,47 418,41 412,33 394,40 395,54 395,54"></polygon>
+            <polygon id="part12.2" onmouseover="highlightListItem('list12.2')" onmouseout="removeHighlight('list12.2')"
+                     class="region js-polygon" data-part="info12"
+                     points="401,59 408,64 408,55 418,48 427,48 427,44 418,41 401,47"></polygon>
+            <polygon id="part12.3" onmouseover="highlightListItem('list12.3')" onmouseout="removeHighlight('list12.3')"
+                     class="region js-polygon" data-part="info12"
+                     points="408,64 415,70 415,57 433,50 427,48 418,48 408,55 408,55"></polygon>
+            <polygon id="part12.4" onmouseover="highlightListItem('list12.4')" onmouseout="removeHighlight('list12.4')"
+                     class="region js-polygon" data-part="info12"
+                     points="415,70 421,74 421,64 437,56 433,50 415,57 415,57 415,57"></polygon>
+            <polygon id="part12.5" onmouseover="highlightListItem('list12.5')" onmouseout="removeHighlight('list12.5')"
+                     class="region js-polygon" data-part="info12"
+                     points="421,74 431,82 431,64 445,63 439,55 421,64 421,64 421,64"></polygon>
+            <polygon id="part12.6" onmouseover="highlightListItem('list12.6')" onmouseout="removeHighlight('list12.6')"
+                     class="region js-polygon" data-part="info12"
+                     points="431,82 438,88 453,82 453,69 446,63 431,64 431,64 431,64"></polygon>
+            <!--            house 13-->
+            <polygon id="part13" class="region js-polygon house-polygon" data-info="house-info13"
+                     points="456,105 456,93 472,87 480,89 486,98 494,100 494,102 507,112 514,121 514,132 498,138"></polygon>
+
+            <polygon id="part13.1" onmouseover="highlightListItem('list13.1')" onmouseout="removeHighlight('list13.1')"
+                     class="region js-polygon" data-part="info13"
+                     points="456,104 461,108 461,96 479,89 472,87 456,93 456,105"></polygon>
+            <polygon id="part13.2" onmouseover="highlightListItem('list13.2')" onmouseout="removeHighlight('list13.2')"
+                     class="region js-polygon" data-part="info13"
+                     points="461,109 470,116 470,106 486,98 480,89 461,96 461,108"></polygon>
+            <polygon id="part13.3" onmouseover="highlightListItem('list13.3')" onmouseout="removeHighlight('list13.3')"
+                     class="region js-polygon" data-part="info13"
+                     points="470,116 478,122 478,110 487,104 494,103 494,100 487,98 470,106"></polygon>
+            <polygon id="part13.4" onmouseover="highlightListItem('list13.4')" onmouseout="removeHighlight('list13.4')"
+                     class="region js-polygon" data-part="info13"
+                     points="478,122 484,127 484,116 494,109 502,108 496,103 487,104 478,110"></polygon>
+            <polygon id="part13.5" onmouseover="highlightListItem('list13.5')" onmouseout="removeHighlight('list13.5')"
+                     class="region js-polygon" data-part="info13"
+                     points="484,127 489,131 489,119 506,111 502,108 494,109 484,116 484,127"></polygon>
+            <polygon id="part13.6" onmouseover="highlightListItem('list13.6')" onmouseout="removeHighlight('list13.6')"
+                     class="region js-polygon" data-part="info13"
+                     points="489,119 489,131 498,138 514,132 514,121 506,111 489,119 489,119"></polygon>
+            <!--            house 14-->
+            <polygon id="part14" class="region js-polygon house-polygon" data-info="house-info14"
+                     points="543,182 533,174 536,170 511,150 511,138 527,132 534,134 535,137 543,144 550,147 554,154 558,154 566,161 566,174"></polygon>
+
+            <polygon id="part14.1" onmouseover="highlightListItem('list14.1')" onmouseout="removeHighlight('list14.1')"
+                     class="region js-polygon" data-part="info14"
+                     points="511,150 517,155 517,145 535,138 534,134 527,132 511,138 511,150"></polygon>
+            <polygon id="part14.2" onmouseover="highlightListItem('list14.2')" onmouseout="removeHighlight('list14.2')"
+                     class="region js-polygon" data-part="info14"
+                     points="517,155 526,162 526,152 543,145 535,138 517,145"></polygon>
+            <polygon id="part14.3" onmouseover="highlightListItem('list14.3')" onmouseout="removeHighlight('list14.3')"
+                     class="region js-polygon" data-part="info14"
+                     points="526,162 536,170 538,169 538,155 554,154 550,147 543,145 526,152"></polygon>
+            <polygon id="part14.4" onmouseover="highlightListItem('list14.4')" onmouseout="removeHighlight('list14.4')"
+                     class="region js-polygon" data-part="info14"
+                     points="533,174 543,182 566,174 566,161 558,154 538,155 538,169 536,170 536,170"></polygon>
+        </svg>
     </div>
     <div id="sidebar">
         <div id="sidebarContent">
@@ -71,677 +341,616 @@
                     <!--                        120+ м² от 15 млн ₽</p>-->
                     <button id="loop_map-show" onclick="nextStep()">СМОТРЕТЬ</button>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info1" class="house-info" style="display: none">
                     <h1 class="title">Дом №1</h1>
                     <div class="house-list">
-                        <a href="">
-                            <div class="row row-house-list house-see">
-                                <div class="h-type">Тип А</div>
-                                <div>99,35 м²</div>
-                                <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                            </div>
+                        <a href="" id="list1.1" onmouseover="highlightPolygon('part1.1')"
+                           onmouseout="removeHighlight('part1.1')" class="row row-house-list item-reserve">
+                            <div class="text-sell-reserve">Тип А</div>
+                            <div>Забронирован</div>
+                            <!--                            <div>99,35 м²</div>-->
+                            <!--                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>-->
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a href="" id="list1.2" onmouseover="highlightPolygon('part1.2')"
+                           onmouseout="removeHighlight('part1.2')" class="row row-house-list item-see">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        <a href="" id="list1.3" onmouseover="highlightPolygon('part1.3')"
+                           onmouseout="removeHighlight('part1.3')" class="row row-house-list item-sell">
+                            <div class="text-sell-reserve">Тип Б</div>
+                            <div>Продан</div>
+                            <!--                            <div>104,61 м²</div>-->
+                            <!--                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>-->
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a href="" id="list1.4" onmouseover="highlightPolygon('part1.4')"
+                           onmouseout="removeHighlight('part1.4')" class="row row-house-list item-see">
                             <div class="h-type">Тип И</div>
                             <div>124,43 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a href="" id="list1.5" onmouseover="highlightPolygon('part1.5')"
+                           onmouseout="removeHighlight('part1.5')" class="row row-house-list item-see">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип А</div>
-                            <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        <a href="" id="list1.6" onmouseover="highlightPolygon('part1.6')"
+                           onmouseout="removeHighlight('part1.6')" class="row row-house-list item-sell">
+                            <div class="text-sell-reserve">Тип А</div>
+                            <div>Продан</div>
+                            <!--                            <div>99,35 м²</div>-->
+                            <!--                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>-->
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a href="" id="list1.7" onmouseover="highlightPolygon('part1.7')"
+                           onmouseout="removeHighlight('part1.7')" class="row row-house-list item-reserve">
+                            <div class="text-sell-reserve">Тип Б</div>
+                            <div>Забронирован</div>
+                            <!--                            <div>103,6 м²</div>-->
+                            <!--                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>-->
+                        </a>
+                        <a href="" id="list1.8" onmouseover="highlightPolygon('part1.8')"
+                           onmouseout="removeHighlight('part1.8')" class="row row-house-list item-see">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        <a href="" id="list1.9" onmouseover="highlightPolygon('part1.9')"
+                           onmouseout="removeHighlight('part1.9')" class="row row-house-list item-sell">
+                            <div class="text-sell-reserve">Тип Д</div>
+                            <div>Продан</div>
+                            <!--                            <div>160,01 м²</div>-->
+                            <!--                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>-->
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info2" class="house-info" style="display: none">
                     <h1 class="title">Дом №2</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list2.1" href="" onmouseover="highlightPolygon('part2.1')"
+                           onmouseout="removeHighlight('part2.1')" class="row row-house-list item-see">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list2.2" href="" onmouseover="highlightPolygon('part2.2')"
+                           onmouseout="removeHighlight('part2.2')" class="row row-house-list item-see">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list2.3" href="" onmouseover="highlightPolygon('part2.3')"
+                           onmouseout="removeHighlight('part2.3')" class="row row-house-list item-see">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list2.4" href="" onmouseover="highlightPolygon('part2.4')"
+                           onmouseout="removeHighlight('part2.4')" class="row row-house-list item-see">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list2.5" href="" onmouseover="highlightPolygon('part2.5')"
+                           onmouseout="removeHighlight('part2.5')" class="row row-house-list item-see">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list2.6" href="" onmouseover="highlightPolygon('part2.6')"
+                           onmouseout="removeHighlight('part2.6')" class="row row-house-list item-see">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info3" class="house-info" style="display: none">
                     <h1 class="title">Дом №3</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list3.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part3.1')"
+                           onmouseout="removeHighlight('part3.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list3.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part3.2')"
+                           onmouseout="removeHighlight('part3.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list3.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part3.3')"
+                           onmouseout="removeHighlight('part3.3')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list3.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part3.4')"
+                           onmouseout="removeHighlight('part3.4')">
                             <div class="h-type">Тип И</div>
                             <div>124,43 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list3.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part3.5')"
+                           onmouseout="removeHighlight('part3.5')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип А</div>
-                            <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info4" class="house-info" style="display: none">
                     <h1 class="title">Дом №4</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list4.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part4.1')"
+                           onmouseout="removeHighlight('part4.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list4.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part4.2')"
+                           onmouseout="removeHighlight('part4.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list4.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part4.3')"
+                           onmouseout="removeHighlight('part4.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list4.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part4.4')"
+                           onmouseout="removeHighlight('part4.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list4.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part4.5')"
+                           onmouseout="removeHighlight('part4.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info5" class="house-info" style="display: none">
                     <h1 class="title">Дом №5</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list5.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.1')"
+                           onmouseout="removeHighlight('part5.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list5.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.2')"
+                           onmouseout="removeHighlight('part5.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list5.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.3')"
+                           onmouseout="removeHighlight('part5.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list5.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.4')"
+                           onmouseout="removeHighlight('part5.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list5.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.5')"
+                           onmouseout="removeHighlight('part5.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list5.6" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.6')"
+                           onmouseout="removeHighlight('part5.6')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
+                        <a id="list5.7" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part5.7')"
+                           onmouseout="removeHighlight('part5.7')">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info6" class="house-info" style="display: none">
                     <h1 class="title">Дом №6</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list6.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part6.1')"
+                           onmouseout="removeHighlight('part6.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list6.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part6.2')"
+                           onmouseout="removeHighlight('part6.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list6.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part6.3')"
+                           onmouseout="removeHighlight('part6.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list6.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part6.4')"
+                           onmouseout="removeHighlight('part6.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list6.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part6.5')"
+                           onmouseout="removeHighlight('part6.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list6.6" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part6.6')"
+                           onmouseout="removeHighlight('part6.6')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info7" class="house-info" style="display: none">
                     <h1 class="title">Дом №7</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list7.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part7.1')"
+                           onmouseout="removeHighlight('part7.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list7.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part7.2')"
+                           onmouseout="removeHighlight('part7.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list7.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part7.3')"
+                           onmouseout="removeHighlight('part7.3')">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a id="list7.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part7.4')"
+                           onmouseout="removeHighlight('part7.4')">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
+                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
+                        </a>
+                        <a id="list7.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part7.5')"
+                           onmouseout="removeHighlight('part7.5')">
                             <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип А</div>
-                            <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип А</div>
-                            <div>99,35 м²</div>
+                            <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info8" class="house-info" style="display: none">
                     <h1 class="title">Дом №8</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list8.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part8.1')"
+                           onmouseout="removeHighlight('part8.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list8.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part8.2')"
+                           onmouseout="removeHighlight('part8.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list8.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part8.3')"
+                           onmouseout="removeHighlight('part8.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list8.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part8.4')"
+                           onmouseout="removeHighlight('part8.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info9" class="house-info" style="display: none">
                     <h1 class="title">Дом №9</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list9.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part9.1')"
+                           onmouseout="removeHighlight('part9.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list9.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part9.2')"
+                           onmouseout="removeHighlight('part9.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list9.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part9.3')"
+                           onmouseout="removeHighlight('part9.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list9.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part9.4')"
+                           onmouseout="removeHighlight('part9.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info10" class="house-info" style="display: none">
                     <h1 class="title">Дом №10</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list10.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.1')"
+                           onmouseout="removeHighlight('part10.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list10.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.2')"
+                           onmouseout="removeHighlight('part10.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list10.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.3')"
+                           onmouseout="removeHighlight('part10.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list10.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.4')"
+                           onmouseout="removeHighlight('part10.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list10.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.5')"
+                           onmouseout="removeHighlight('part10.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list10.6" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.6')"
+                           onmouseout="removeHighlight('part10.6')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
+                        <a id="list10.7" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part10.7')"
+                           onmouseout="removeHighlight('part10.7')">
+                            <div class="h-type">Тип Б</div>
+                            <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info11" class="house-info" style="display: none">
                     <h1 class="title">Дом №11</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list11.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part11.1')"
+                           onmouseout="removeHighlight('part11.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list11.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part11.2')"
+                           onmouseout="removeHighlight('part11.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list11.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part11.3')"
+                           onmouseout="removeHighlight('part11.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
+                        <a id="list11.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part11.4')"
+                           onmouseout="removeHighlight('part11.4')">
+                            <div class="h-type">Тип А</div>
+                            <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list11.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part11.5')"
+                           onmouseout="removeHighlight('part11.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info12" class="house-info" style="display: none">
                     <h1 class="title">Дом №12</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list12.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part12.1')"
+                           onmouseout="removeHighlight('part12.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list12.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part12.2')"
+                           onmouseout="removeHighlight('part12.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list12.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part12.3')"
+                           onmouseout="removeHighlight('part12.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list12.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part12.4')"
+                           onmouseout="removeHighlight('part12.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list12.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part12.5')"
+                           onmouseout="removeHighlight('part12.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list12.6" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part12.6')"
+                           onmouseout="removeHighlight('part12.6')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info13" class="house-info" style="display: none">
                     <h1 class="title">Дом №13</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list13.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part13.1')"
+                           onmouseout="removeHighlight('part13.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list13.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part13.2')"
+                           onmouseout="removeHighlight('part13.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>104,61 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип И</div>
-                            <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list13.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part13.3')"
+                           onmouseout="removeHighlight('part13.3')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list13.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part13.4')"
+                           onmouseout="removeHighlight('part13.4')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list13.5" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part13.5')"
+                           onmouseout="removeHighlight('part13.5')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list13.6" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part13.6')"
+                           onmouseout="removeHighlight('part13.6')">
                             <div class="h-type">Тип Б</div>
                             <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
-                <div class="house-info" style="display: none">
+                <div id="house-info14" class="house-info" style="display: none">
                     <h1 class="title">Дом №14</h1>
                     <div class="house-list">
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list14.1" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part14.1')"
+                           onmouseout="removeHighlight('part14.1')">
                             <div class="h-type">Тип А</div>
                             <div>99,35 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list14.2" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part14.2')"
+                           onmouseout="removeHighlight('part14.2')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list14.3" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part14.3')"
+                           onmouseout="removeHighlight('part14.3')">
                             <div class="h-type">Тип Б</div>
                             <div>104,61 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
-                        <a href="" class="row row-house-list house-see">
+                        <a id="list14.4" href="" class="row row-house-list item-see" onmouseover="highlightPolygon('part14.4')"
+                           onmouseout="removeHighlight('part14.4')">
                             <div class="h-type">Тип И</div>
                             <div>124,43 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип А</div>
-                            <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип А</div>
-                            <div>99,35 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Б</div>
-                            <div>103,6 м²</div>
-                            <div><img class="arrow-right" src="img/back.svg" alt=""></div>
-                        </a>
-                        <a href="" class="row row-house-list house-see">
-                            <div class="h-type">Тип Д</div>
-                            <div>160,01 м²</div>
                             <div><img class="arrow-right" src="img/back.svg" alt=""></div>
                         </a>
                     </div>
                 </div>
             </div>
             <script>
-                // Получаем все полигоны
-                var polygons = document.querySelectorAll('.js-polygon');
-
-                // Получаем все блоки информации
-                var infoBlocks = document.querySelectorAll('.house-info');
+                var house = document.querySelectorAll('.house-polygon');
 
                 // Добавляем обработчики событий ко всем полигонам
-                polygons.forEach(function (polygon, index) {
+                house.forEach(function (polygon) {
                     polygon.addEventListener('click', function () {
-                        // Скрываем все блоки информации
-                        infoBlocks.forEach(function (infoBlock) {
-                            infoBlock.style.display = 'none';
+                        var infoBlockId = polygon.getAttribute('data-info');
+                        var infoBlock = document.getElementById(infoBlockId);
+
+                        // Сбрасываем стили для всех полигонов
+                        house.forEach(function (polygon) {
+                            // polygon.style.display = 'inline';
+                            polygon.style.zIndex = '';
+                            polygon.style.fill = '';
+                            polygon.style.stroke = '';
                         });
 
+                        // Сбрасываем стили для всех частей
+                        document.querySelectorAll('.house-info').forEach(function (infoBlock) {
+                            infoBlock.style.display = 'none';
+                        });
+                        document.querySelectorAll('[data-part]').forEach(function (part) {
+                            part.style.display = 'none';
+                        });
                         // Отображаем блок информации, соответствующий текущему полигону
-                        infoBlocks[index].style.display = 'block';
+                        infoBlock.style.display = 'block';
+
+                        var infoValue = polygon.getAttribute('data-info').split('-')[1];
+                        // Получаем элементы с атрибутом data-part, который соответствует значению из data-info
+                        var parts = document.querySelectorAll('[data-part="' + infoValue + '"]');
+                        parts.forEach(function (part) {
+                            part.style.display = 'inline';
+                        });
+
+                        // // Скрываем текущий полигон
+                        // polygon.style.display = 'none';
+                        polygon.style.zIndex = '-1';
+                        polygon.style.fill = 'transparent';
+                        polygon.style.stroke = '#59673b';
                     });
                 });
 
+
+                function highlightPolygon(polygonId) {
+                    var polygon = document.getElementById(polygonId);
+                    polygon.classList.add('pol-active');
+                }
+
+                function highlightListItem(listItemId) {
+                    var listItem = document.getElementById(listItemId);
+                    listItem.classList.add('pol-active');
+                }
+
+                function removeHighlight(elementId) {
+                    var element = document.getElementById(elementId);
+                    element.classList.remove('pol-active');
+                }
+
             </script>
             <script>
-
                 function nextStep() {
                     const loopMap = document.getElementById('loop-map');
                     document.getElementById('sidebar').style.right = '-500px';
@@ -756,12 +965,19 @@
                     document.querySelector('.house-info').style.display = "none";
                     const mainMap = document.getElementById('main_map');
                     const loopMap = document.getElementById('loop-map');
-                    infoBlocks.forEach(function (infoBlock) {
+                    house.forEach(function (polygon) {
+                        polygon.style.display = 'inline';
+                    });
+                    document.querySelectorAll('[data-part]').forEach(function (part) {
+                        part.style.display = 'none';
+                    });
+                    document.querySelectorAll('.house-info').forEach(function (infoBlock) {
                         infoBlock.style.display = 'none';
                     });
                     loopMap.style.display = 'none';
                     mainMap.style.height = '100%';
                     mainMap.style.display = 'block';
+                    document.getElementById('pol-area').classList.remove('area-active');
                     document.querySelector('.arrow-btn').style.display = 'none';
                 }
             </script>
